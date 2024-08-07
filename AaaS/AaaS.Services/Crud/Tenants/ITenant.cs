@@ -1,5 +1,8 @@
 ﻿namespace AaaS.Services.Crud.Tenants;
 
+/// <summary>
+///     Describes the basic data of a tenant.
+/// </summary>
 public interface ITenant
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace AaaS.Services.Crud.Tenants;
 
+/// <summary>
+///     Provides crud operations for <see cref="ITenant" />.
+/// </summary>
 public interface ITenantCrudService
 {
     /// <summary>
@@ -33,7 +36,7 @@ public interface ITenantCrudService
     /// </summary>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>A list of available tenants.</returns>
-    Task<IEnumerable<ITenant>> ReadAllAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<ITenant>> ReadAsync(CancellationToken cancellationToken);
 
     /// <summary>
     ///     Read a tenant by its id.

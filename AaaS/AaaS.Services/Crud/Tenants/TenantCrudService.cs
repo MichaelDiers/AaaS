@@ -1,7 +1,15 @@
 ﻿namespace AaaS.Services.Crud.Tenants;
 
-internal class TenantCrudService : ITenantCrudService
+/// <summary>
+///     Provides crud operations for <see cref="ITenant" />.
+/// </summary>
+internal class TenantCrudService(ITenantFactory tenantFactory) : ITenantCrudService
 {
+    /// <summary>
+    ///     A factory for creating tenants.
+    /// </summary>
+    private readonly ITenantFactory tenantFactory = tenantFactory;
+
     /// <summary>
     ///     Create a new tenant.
     /// </summary>
@@ -23,7 +31,7 @@ internal class TenantCrudService : ITenantCrudService
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var tenant = new Tenant(
+        var tenant = this.tenantFactory.Create(
             id,
             name,
             isActive,
@@ -39,6 +47,8 @@ internal class TenantCrudService : ITenantCrudService
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         await Task.CompletedTask;
     }
 
@@ -47,7 +57,7 @@ internal class TenantCrudService : ITenantCrudService
     /// </summary>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>A list of available tenants.</returns>
-    public async Task<IEnumerable<ITenant>> ReadAllAsync(CancellationToken cancellationToken)
+    public async Task<IEnumerable<ITenant>> ReadAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -64,7 +74,7 @@ internal class TenantCrudService : ITenantCrudService
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var tenant = new Tenant(
+        var tenant = this.tenantFactory.Create(
             id,
             nameof(ITenant.Name),
             true,
