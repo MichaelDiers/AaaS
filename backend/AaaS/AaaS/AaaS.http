@@ -1,0 +1,6 @@
+@AaaS_HostAddress = http://localhost:5053
+
+GET {{AaaS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
