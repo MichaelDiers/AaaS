@@ -1,0 +1,12 @@
+name: Build and test AaaS
+on:
+  push:
+    paths:
+      - AaaS
+      - .github/workflows/AaaS.yaml
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    uses: MichaelDiers/github-workflows/.github/workflows/dotnet-build-and-test.yaml@main
+    with:
+      solution-directory: AaaS
